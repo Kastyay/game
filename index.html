@@ -281,7 +281,7 @@
             margin-top: 10px;
         }
 
-        /* НОВЫЙ БЛОК: Котик */
+        /* Котик */
         .cat-section {
             background: #fdf2e0;
             border-radius: 48px;
@@ -314,7 +314,7 @@
             margin: 5px 0;
         }
 
-        /* НОВЫЙ БЛОК: Генератор поддержки */
+        /* Генератор поддержки */
         .support-section {
             background: #f5e6f5;
             border-radius: 48px;
@@ -451,7 +451,7 @@
             </div>
         </div>
 
-        <!-- 4. НОВОЕ: Погладь антистресс-кота -->
+        <!-- 4. КОТИК с живым мурлыканьем и вибрацией 5 секунд -->
         <div class="cat-section">
             <div class="cat-title">🐱 Погладь антистресс-кота</div>
             <div id="catEmoji" class="cat-emoji">😺</div>
@@ -459,7 +459,7 @@
             <div class="game-message" id="catMessage">Нажми на котика — он замурлычет и успокоит тебя.</div>
         </div>
 
-        <!-- 5. НОВОЕ: Генератор мягкой поддержки -->
+        <!-- 5. Генератор мягкой поддержки -->
         <div class="support-section">
             <div class="cat-title">🌸 Генератор мягкой поддержки</div>
             <button class="small-btn support-btn" id="supportBtn">✨ Скажи мне доброе слово ✨</button>
@@ -790,59 +790,79 @@
     }
     startGameBtn.addEventListener('click', startGame);
 
-    // ========== 4. КОТИК ==========
+    // ========== 4. КОТИК с живым мурлыканьем и вибрацией 5 секунд ==========
     let petCount = 0;
     const catEmoji = document.getElementById('catEmoji');
     const catPetsSpan = document.getElementById('catPets');
-    const catMessage = document.getElementById('catMessage');
+    const catMessageDiv = document.getElementById('catMessage');
+
+    // Создаём три аудиообъекта (пути к твоим файлам в папке sounds)
+    const murSounds = [
+        new Audio('sounds/mur1.mp3'),
+        new Audio('sounds/mur2.mp3'),
+        new Audio('sounds/mur3.mp3')
+    ];
+
+    // Функция остановки всех мурлыканий (чтобы не наслаивались)
+    function stopAllMurr() {
+        murSounds.forEach(sound => {
+            sound.pause();
+            sound.currentTime = 0;
+        });
+    }
+
+    // Функция долгой вибрации 5 секунд
+    function longVibrate() {
+        if (vibeEnabled && navigator.vibrate) {
+            navigator.vibrate(5000);  // 5000 миллисекунд = 5 секунд
+        }
+    }
+
+    // Сменяющиеся эмоции кота
     const catStates = ['😺', '😸', '😻', '😽', '😺'];
     let catIndex = 0;
 
     function petCat() {
+        // 1. Увеличиваем счётчик поглаживаний
         petCount++;
         catPetsSpan.innerText = petCount;
-        // Меняем эмоцию кота
+
+        // 2. Меняем эмодзи кота
         catIndex = (catIndex + 1) % catStates.length;
         catEmoji.innerText = catStates[catIndex];
-        catMessage.innerHTML = '🐾 Мур-р-р... Спасибо! Ты молодец, что заботишься о себе.';
-        if (soundEnabled) {
-            // синтезированное мурлыканье
-            try {
-                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.type = 'sine';
-                osc.frequency.value = 140;
-                gain.gain.value = 0.08;
-                osc.start();
-                gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.6);
-                osc.stop(audioCtx.currentTime + 0.6);
-                // второй тон
-                setTimeout(() => {
-                    const osc2 = audioCtx.createOscillator();
-                    const gain2 = audioCtx.createGain();
-                    osc2.connect(gain2);
-                    gain2.connect(audioCtx.destination);
-                    osc2.frequency.value = 160;
-                    gain2.gain.value = 0.06;
-                    osc2.start();
-                    gain2.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.5);
-                    osc2.stop(audioCtx.currentTime + 0.5);
-                }, 200);
-            } catch(e) {}
-        }
-        vibrate([30, 15]);
-        // анимация
+
+        // 3. Останавливаем предыдущее мурлыканье (если играло)
+        stopAllMurr();
+
+        // 4. Выбираем случайный звук (0,1,2)
+        const randomIndex = Math.floor(Math.random() * murSounds.length);
+        const selectedSound = murSounds[randomIndex];
+
+        // 5. Запускаем звук
+        selectedSound.play().catch(e => console.log("Audio play error:", e));
+
+        // 6. Запускаем вибрацию на 5 секунд
+        longVibrate();
+
+        // 7. Сообщение для педагога
+        catMessageDiv.innerHTML = '🐾 Мур-р-р... Ты молодец, что заботишься о себе.';
+
+        // 8. Маленькая анимация кота (увеличение)
         catEmoji.style.transform = 'scale(1.1)';
         setTimeout(() => { catEmoji.style.transform = 'scale(1)'; }, 150);
+
+        // 9. Через 2.5 секунды возвращаем стандартную подсказку
         setTimeout(() => {
-            catMessage.innerHTML = 'Нажми на котика — он замурлычет и успокоит тебя.';
-        }, 2000);
+            catMessageDiv.innerHTML = 'Нажми на котика — он замурлычет и успокоит тебя.';
+        }, 2500);
     }
+
+    // Назначение обработчиков (клик мыши и тач)
     catEmoji.addEventListener('click', petCat);
-    catEmoji.addEventListener('touchstart', (e) => { e.preventDefault(); petCat(); });
+    catEmoji.addEventListener('touchstart', (e) => { 
+        e.preventDefault(); 
+        petCat(); 
+    });
 
     // ========== 5. ГЕНЕРАТОР ПОДДЕРЖКИ ==========
     const supportMessages = [
