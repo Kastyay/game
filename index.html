@@ -3,175 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Четверг: Психологическое SPA — Игра «Сожми лимон»</title>
+    <title>Четверг: Психологическое SPA — Лимонная релаксация</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            user-select: none; /* убирает выделение текста на кнопках */
+            user-select: none;
         }
 
         body {
-            background: linear-gradient(145deg, #e0f0e8 0%, #c8e0d4 100%);
+            background: linear-gradient(145deg, #d4e2d0 0%, #bdd8b0 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Segoe UI', 'Roboto', 'Quicksand', system-ui, -apple-system, sans-serif;
+            font-family: 'Segoe UI', 'Roboto', system-ui, sans-serif;
             padding: 20px;
         }
 
-        /* основной контейнер-карточка */
         .game-container {
-            max-width: 650px;
+            max-width: 700px;
             width: 100%;
-            background: rgba(255, 248, 235, 0.95);
+            background: rgba(255, 250, 240, 0.97);
             border-radius: 68px;
-            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 245, 215, 0.6);
-            backdrop-filter: blur(2px);
+            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.2);
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.2s;
         }
 
-        /* шапка с днём и названием */
         .day-badge {
-            background: #f9b23f;
-            padding: 12px 24px;
+            background: linear-gradient(135deg, #F7B05E, #F2A541);
+            padding: 12px 20px;
             text-align: center;
             color: #2d3e2b;
             font-weight: bold;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-            background: linear-gradient(135deg, #F7B05E, #F2A541);
             border-bottom: 3px solid #e08e2e;
         }
 
         .day-badge span {
             background: #fff2df;
-            padding: 5px 16px;
-            border-radius: 50px;
-            font-size: 1.1rem;
+            padding: 5px 20px;
+            border-radius: 40px;
+            font-size: 1rem;
             display: inline-block;
-            box-shadow: inset 0 1px 2px #0001, 0 2px 5px #ffd58c;
         }
 
         .content {
-            padding: 28px 28px 38px;
+            padding: 25px 28px 35px;
         }
 
         h1 {
-            font-size: 1.9rem;
+            font-size: 1.8rem;
             font-weight: 700;
             color: #2b5e2f;
-            margin-bottom: 8px;
             display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
             justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .sub {
-            color: #6f4f2e;
             border-left: 4px solid #f9b23f;
             padding-left: 16px;
-            margin-bottom: 28px;
-            font-weight: 500;
+            margin: 12px 0 20px;
             background: #fff4e6;
-            border-radius: 0 40px 40px 0;
-            line-height: 1.3;
-            font-size: 0.95rem;
+            border-radius: 0 30px 30px 0;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #6f4f2e;
         }
 
-        /* блок психологической справки */
         .why-block {
             background: #eef4e9;
-            border-radius: 32px;
-            padding: 18px 20px;
-            margin-bottom: 32px;
+            border-radius: 28px;
+            padding: 15px 20px;
+            margin-bottom: 25px;
             font-size: 0.9rem;
-            border: 1px solid #cfdec5;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.03);
+            border-left: 6px solid #f9b23f;
         }
 
-        .why-block p {
-            margin-bottom: 8px;
-            display: flex;
-            gap: 12px;
-            align-items: baseline;
-        }
-
-        .why-block strong {
-            color: #c46f1a;
-        }
-
-        .lemon-icon {
-            font-size: 1.25rem;
-        }
-
-        /* игровая арена */
         .game-area {
             background: #fef9e6;
-            border-radius: 58px;
-            padding: 25px 20px 35px;
+            border-radius: 50px;
+            padding: 20px;
             text-align: center;
-            box-shadow: inset 0 1px 6px #fffaee, 0 10px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
             margin-bottom: 25px;
-            transition: 0.2s;
         }
 
         .lemon-visual {
             position: relative;
             display: flex;
             justify-content: center;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
         #lemon-svg {
-            width: 180px;
-            height: 180px;
+            width: 160px;
+            height: 160px;
             cursor: pointer;
-            transition: transform 0.1s ease, filter 0.05s;
-            filter: drop-shadow(0 12px 18px rgba(0,0,0,0.2));
-        }
-
-        #lemon-svg:active {
-            transform: scale(0.97);
-        }
-
-        .squeeze-ui {
-            margin: 12px 0 10px;
+            transition: transform 0.03s linear;
+            filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.2));
         }
 
         .squeeze-bar {
             background: #e2dbc9;
-            border-radius: 32px;
-            height: 18px;
-            width: 100%;
-            max-width: 280px;
-            margin: 15px auto;
+            border-radius: 30px;
+            height: 20px;
+            width: 90%;
+            margin: 12px auto;
             overflow: hidden;
-            box-shadow: inset 0 1px 4px #0002;
         }
 
         .squeeze-fill {
             width: 0%;
             height: 100%;
             background: linear-gradient(90deg, #ffcf4a, #ffa52f);
-            border-radius: 32px;
-            transition: width 0.05s linear;
+            border-radius: 30px;
+            transition: width 0.02s linear;
         }
 
-        .instruction {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #4a6b3c;
+        .counter {
+            font-size: 1rem;
             background: #fff0cf;
             display: inline-block;
-            padding: 6px 18px;
+            padding: 5px 15px;
             border-radius: 40px;
-            margin: 10px 0 8px;
+            margin: 8px 0;
+            font-weight: bold;
         }
 
         .squeeze-btn {
@@ -179,13 +140,12 @@
             border: none;
             color: white;
             font-weight: bold;
-            font-size: 1.3rem;
-            padding: 12px 32px;
+            font-size: 1.2rem;
+            padding: 12px 30px;
             border-radius: 60px;
             cursor: pointer;
-            box-shadow: 0 6px 0 #b4621a;
+            box-shadow: 0 5px 0 #b4621a;
             transition: 0.05s linear;
-            margin: 8px 0;
             font-family: inherit;
             width: 80%;
             max-width: 260px;
@@ -193,97 +153,94 @@
 
         .squeeze-btn:active {
             transform: translateY(3px);
-            box-shadow: 0 3px 0 #b4621a;
+            box-shadow: 0 2px 0 #b4621a;
         }
 
         .relax-message {
-            font-size: 1rem;
-            color: #2f6b3c;
+            font-size: 0.9rem;
             background: #eafbe6;
             border-radius: 28px;
             padding: 10px;
-            margin-top: 18px;
-            transition: all 0.2s;
+            margin-top: 12px;
+            transition: 0.1s;
         }
 
-        /* карточка МАК (доп. элемент) */
-        .mak-card {
-            margin-top: 20px;
-            background: #fff7e8;
+        .extra-panel {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0 10px;
+        }
+
+        .small-btn {
+            background: #d9e3d1;
+            border: none;
+            padding: 8px 18px;
             border-radius: 40px;
-            padding: 18px;
-            border: 1px solid #ffe3b5;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: 0.1s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .mak-title {
+        .small-btn:active {
+            transform: scale(0.96);
+        }
+
+        .breathing-circle {
+            width: 60px;
+            height: 60px;
+            background: #cfe2cf;
+            border-radius: 50%;
+            margin: 5px auto;
+            transition: all 1s ease;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: #2b5e2f;
             font-weight: bold;
-            color: #885e2c;
-            margin-bottom: 12px;
+        }
+
+        .mak-card {
+            background: #fff7e8;
+            border-radius: 40px;
+            padding: 16px;
+            border: 1px solid #ffe3b5;
+            margin-top: 20px;
         }
 
         .nature-img {
             width: 100%;
-            border-radius: 32px;
-            max-height: 140px;
+            border-radius: 28px;
+            max-height: 160px;
             object-fit: cover;
             cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .mak-question {
             font-style: italic;
             margin-top: 12px;
+            font-size: 0.85rem;
             background: #fef0db;
-            padding: 10px;
-            border-radius: 28px;
-            font-size: 0.85rem;
-        }
-
-        button.secondary {
-            background: #c2d9b3;
-            box-shadow: 0 4px 0 #8eaa7a;
-            color: #2d4a1e;
-            font-size: 0.85rem;
-            padding: 8px 16px;
-            margin-top: 10px;
-            width: auto;
+            padding: 8px;
+            border-radius: 20px;
         }
 
         footer {
             text-align: center;
             font-size: 0.7rem;
             color: #a18f6e;
-            padding: 16px 24px 20px;
+            padding: 15px;
             border-top: 1px solid #ece1cf;
         }
-        button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-family: inherit;
-        }
-        .flex-btns {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        @media (max-width: 480px) {
-            .content {
-                padding: 20px;
-            }
-            #lemon-svg {
-                width: 140px;
-                height: 140px;
-            }
-            .squeeze-btn {
-                font-size: 1rem;
-                padding: 10px 20px;
-            }
+
+        @media (max-width: 500px) {
+            .content { padding: 18px; }
+            #lemon-svg { width: 130px; height: 130px; }
         }
     </style>
 </head>
@@ -295,220 +252,68 @@
     </div>
     <div class="content">
         <h1>
-            🧘‍♀️ Игра «Сожми лимон»
-            <span style="font-size: 1rem;">прогрессивная релаксация</span>
+            🧘 Сожми лимон
+            <span style="font-size: 0.8rem;">прогрессивная релаксация</span>
         </h1>
-        <div class="sub">
-            📖 Упражнение из программы антистресс: снимаем мышечные зажимы через напряжение + расслабление
-        </div>
-
-        <!-- краткое "зачем" -->
+        <div class="sub">📖 Мышечное напряжение → глубокое расслабление</div>
         <div class="why-block">
-            <p><span class="lemon-icon">🧠</span> <strong>Зачем это нужно:</strong> стресс «живёт» в мышцах (плечи, челюсть, кулаки). Сильно сжимая лимон — мы даём телу пик напряжения, а расслабляясь — отправляем мозгу сигнал: «опасность миновала».</p>
-            <p><span class="lemon-icon">⚡</span> <strong>Как работает игра:</strong> нажми и удерживай лимон, почувствуй жёсткое сжатие в руках, плечах. Отпусти — и волна расслабления пройдёт по всему телу. Лучше делать 3–5 повторов.</p>
+            🧠 <strong>Зачем:</strong> стресс живёт в мышцах. Сжимая лимон, ты даёшь сигнал мозгу: «опасность прошла», а расслабление снимает зажимы. Повтори 3–5 раз для лучшего эффекта.
         </div>
 
-        <!-- ИГРОВОЙ БЛОК: ЛИМОН -->
         <div class="game-area">
             <div class="lemon-visual">
-                <!-- SVG лимона, анимируемый сжатие через масштабирование и цвет -->
-                <svg id="lemon-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- тень для объёма -->
+                <svg id="lemon-svg" viewBox="0 0 100 100" fill="none">
                     <defs>
                         <radialGradient id="lemonGrad" cx="30%" cy="30%" r="70%">
                             <stop offset="0%" stop-color="#FFE484" />
                             <stop offset="70%" stop-color="#F9C43D" />
                             <stop offset="100%" stop-color="#E5A022" />
                         </radialGradient>
-                        <filter id="squeeze-shadow" x="-20%" y="-20%" width="140%" height="140%">
-                            <feDropShadow dx="2" dy="5" stdDeviation="4" flood-color="#aa7733" flood-opacity="0.4"/>
-                        </filter>
                     </defs>
-                    <!-- лимон овальный -->
-                    <ellipse cx="50" cy="54" rx="38" ry="42" fill="url(#lemonGrad)" stroke="#E0A82B" stroke-width="2.5" />
-                    <!-- текстура / блик -->
-                    <ellipse cx="36" cy="38" rx="12" ry="10" fill="#FFF9CF" opacity="0.5" />
-                    <!-- маленький хвостик -->
-                    <path d="M50 14 Q53 9 58 8" stroke="#6f5e3a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                    <ellipse cx="58" cy="7" rx="2.5" ry="3" fill="#7a643f" />
-                    <!-- капли сока (сжатие) -->
+                    <ellipse cx="50" cy="54" rx="38" ry="42" fill="url(#lemonGrad)" stroke="#E0A82B" stroke-width="2" />
+                    <ellipse cx="36" cy="38" rx="10" ry="8" fill="#FFF9CF" opacity="0.6" />
+                    <path d="M50 14 Q53 9 58 8" stroke="#6f5e3a" stroke-width="2" fill="none" />
+                    <ellipse cx="58" cy="7" rx="2" ry="2.5" fill="#7a643f" />
                     <g id="juice-drops" opacity="0">
-                        <circle cx="32" cy="68" r="2.2" fill="#FFB347" />
-                        <circle cx="65" cy="71" r="1.8" fill="#FFB347" />
-                        <circle cx="47" cy="85" r="2.5" fill="#F2981C" />
+                        <circle cx="30" cy="70" r="2" fill="#FFB347" />
+                        <circle cx="65" cy="72" r="1.8" fill="#FFB347" />
+                        <circle cx="48" cy="85" r="2.2" fill="#F2981C" />
                     </g>
                 </svg>
             </div>
-            <div class="squeeze-ui">
-                <div class="instruction">🍋 СЖИМАЙ ЛИМОН СИЛОЙ!</div>
-                <div class="squeeze-bar">
-                    <div class="squeeze-fill" id="squeezeFill"></div>
-                </div>
-                <div class="flex-btns">
-                    <button class="squeeze-btn" id="squeezeBtn">🤜 СЖАТЬ / Удерживать 🤛</button>
-                </div>
-                <div id="relaxMsg" class="relax-message">
-                    👆 Нажми и держи кнопку — выжимай сок стресса. Отпусти — расслабься!
-                </div>
+            <div class="squeeze-bar">
+                <div class="squeeze-fill" id="squeezeFill"></div>
             </div>
+            <div class="counter" id="counterDisplay">🌀 Повторов: 0</div>
+            <button class="squeeze-btn" id="squeezeBtn">🤜 СЖАТЬ И ДЕРЖАТЬ 🤛</button>
+            <div id="relaxMsg" class="relax-message">👇 Нажми и удерживай — выжимай стресс. Отпусти — расслабься.</div>
         </div>
 
-        <!-- БОНУС: МАК карта природы для рефлексии (арт-терапия из дня психологического SPA) -->
+        <div class="extra-panel">
+            <button class="small-btn" id="resetCounterBtn">🔄 Сбросить счётчик</button>
+            <button class="small-btn" id="toggleSoundBtn">🔊 Звук: Вкл</button>
+            <button class="small-btn" id="breathBtn">🌬️ Сделать вдох</button>
+        </div>
+        <div id="breathCircle" class="breathing-circle">Вдох</div>
+
+        <!-- МАК карты с твоими ссылками -->
         <div class="mak-card">
-            <div class="mak-title">
-                🖼️ Метафорическая карта природы <span style="font-size:0.75rem;">(настройка на ресурс)</span>
-            </div>
-            <img id="natureImage" class="nature-img" src="https://picsum.photos/id/104/400/200" alt="Картина природы" style="cursor:pointer;">
-            <div class="mak-question" id="makQuestion">
-                🌱 Что эта картинка говорит тебе сейчас? Какое чувство или образ помогает восстановиться?
-            </div>
-            <div class="flex-btns" style="margin-top: 8px;">
-                <button class="secondary" id="nextNatureBtn">🎴 Другой образ природы</button>
-            </div>
-            <div style="font-size: 0.7rem; text-align: center; margin-top: 12px; color:#bc9a64;">
-                ✨ «Арт-терапия с картами»: выбери образ, который отзывается спокойствием
+            <div class="mak-title">🖼️ Метафорическая карта природы</div>
+            <img id="natureImage" class="nature-img" alt="природа" style="cursor:pointer;">
+            <div class="mak-question" id="makQuestion"></div>
+            <div style="display: flex; gap: 8px; justify-content: center; margin-top: 12px;">
+                <button class="small-btn" id="prevNatureBtn">◀ Пред. образ</button>
+                <button class="small-btn" id="nextNatureBtn">След. образ ▶</button>
             </div>
         </div>
     </div>
-    <footer>
-        🧘‍♀️ Упражнение из четверга «Психологическое SPA» — программа восстановления для педагогов<br>
-        Сжимай лимон → ощути напряжение → отпусти → почувствуй расслабление
-    </footer>
+    <footer>🍋 Сжимай лимон — отпускай напряжение. Повтори 3–5 раз для полной релаксации.</footer>
 </div>
 
 <script>
-    // === ИГРА "СОЖМИ ЛИМОН": прогрессивная мышечная релаксация ===
-    let squeezeInterval = null;
-    let currentSqueeze = 0;      // 0..100
-    let isSqueezing = false;
-    const squeezeFill = document.getElementById('squeezeFill');
-    const relaxMsgDiv = document.getElementById('relaxMsg');
-    const lemonSvg = document.getElementById('lemon-svg');
-    const juiceDrops = document.getElementById('juice-drops');
-    const squeezeBtn = document.getElementById('squeezeBtn');
-
-    // функция обновления визуала лимона в зависимости от силы сжатия
-    function updateLemonVisual(intensity) {
-        // intensity 0..1
-        let scale = 1 - (intensity * 0.12);     // от 1 до 0.88 (сжатие)
-        let rotate = intensity * 6;              // легкий наклон
-        let colorVal = 220 - Math.floor(intensity * 50);   // темнеет при сжатии
-        // меняем цвет через фильтр или динамически? проще через transform
-        lemonSvg.style.transform = `scale(${scale}) rotate(${rotate}deg)`;
-        // дополнительные капли сока при сильном сжатии
-        if (juiceDrops) {
-            juiceDrops.setAttribute('opacity', Math.min(intensity * 1.5, 0.9));
-        }
-        // изменение цвета лимона чуть интенсивнее через CSS filter? добавим легкое затемнение
-        let darkFilter = intensity > 0.1 ? `brightness(${1 - intensity * 0.2})` : 'brightness(1)';
-        lemonSvg.style.filter = `drop-shadow(0 8px 12px rgba(0,0,0,0.2)) ${darkFilter}`;
-    }
-
-    function setSqueezePercent(percent) {
-        percent = Math.min(100, Math.max(0, percent));
-        currentSqueeze = percent;
-        squeezeFill.style.width = percent + '%';
-        const intensity = percent / 100;
-        updateLemonVisual(intensity);
-        // смена текста подсказки
-        if (percent > 85) {
-            relaxMsgDiv.innerHTML = '💪 ОГОНЬ! Максимальное напряжение! Почувствуй, как напряжены кисти, плечи... Готов расслабиться? Отпусти кнопку!';
-            relaxMsgDiv.style.background = '#ffe0b5';
-        } else if (percent > 40) {
-            relaxMsgDiv.innerHTML = '🍋 Давление растёт, ты выжимаешь стресс. Продолжай сжимать, чувствуй мышцы рук.';
-            relaxMsgDiv.style.background = '#fef2da';
-        } else {
-            relaxMsgDiv.innerHTML = '👐 Сжимай крепче! Представь, что выжимаешь настоящий лимон до последней капли.';
-            relaxMsgDiv.style.background = '#eafbe6';
-        }
-    }
-
-    function startSqueeze() {
-        if (squeezeInterval) clearInterval(squeezeInterval);
-        isSqueezing = true;
-        // увеличиваем сжатие постепенно, чтобы плавно нарастить напряжение (имитация реального зажима)
-        let target = currentSqueeze;
-        squeezeInterval = setInterval(() => {
-            if (!isSqueezing) return;
-            if (currentSqueeze < 100) {
-                let increment = 6;
-                let newVal = Math.min(currentSqueeze + increment, 100);
-                setSqueezePercent(newVal);
-            } else {
-                // если уже на 100, просто держим
-                if (squeezeInterval) clearInterval(squeezeInterval);
-                squeezeInterval = null;
-            }
-        }, 45);
-    }
-
-    function stopSqueeze() {
-        if (squeezeInterval) {
-            clearInterval(squeezeInterval);
-            squeezeInterval = null;
-        }
-        isSqueezing = false;
-        // ЭФФЕКТ РАССЛАБЛЕНИЯ: сброс до 0% плавно, но с психологическим сигналом
-        if (currentSqueeze > 0) {
-            // Показываем сообщение о расслаблении
-            relaxMsgDiv.innerHTML = '🧘‍♀️ Отпусти! Расслабление... Почувствуй, как тепло разливается в руках, плечи опускаются. Повтори 2–3 раза для лучшего эффекта.';
-            relaxMsgDiv.style.background = '#dcf5d2';
-            // анимация спада сжатия (быстрое расслабление)
-            let relaxInterval = setInterval(() => {
-                if (currentSqueeze <= 2) {
-                    setSqueezePercent(0);
-                    clearInterval(relaxInterval);
-                    relaxMsgDiv.innerHTML = '✨ Отлично! Ты сбросил(а) мышечное напряжение. Если хочешь, повтори снова.';
-                    relaxMsgDiv.style.background = '#eafbe6';
-                } else {
-                    setSqueezePercent(Math.max(0, currentSqueeze - 12));
-                }
-            }, 35);
-        } else {
-            setSqueezePercent(0);
-            relaxMsgDiv.innerHTML = '🌿 Нажми и удерживай, чтобы выжать тревогу, а после отпускания — глубокая релаксация.';
-        }
-    }
-
-    // обработчики для кнопки (мышь/тач)
-    squeezeBtn.addEventListener('mousedown', (e) => {
-        e.preventDefault();
-        if (squeezeInterval) clearInterval(squeezeInterval);
-        startSqueeze();
-    });
-    squeezeBtn.addEventListener('mouseup', () => {
-        stopSqueeze();
-    });
-    squeezeBtn.addEventListener('mouseleave', () => {
-        if (isSqueezing) stopSqueeze();
-    });
-    // для сенсорных экранов
-    squeezeBtn.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        startSqueeze();
-    });
-    squeezeBtn.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        stopSqueeze();
-    });
-    // также клик по самому лимону для альтернативного удержания (доп)
-    lemonSvg.addEventListener('mousedown', (e) => {
-        e.preventDefault();
-        startSqueeze();
-    });
-    lemonSvg.addEventListener('mouseup', () => stopSqueeze());
-    lemonSvg.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        startSqueeze();
-    });
-    lemonSvg.addEventListener('touchend', () => stopSqueeze());
-
-    // инициализация
-    setSqueezePercent(0);
-
-    // === БЛОК МАК-КАРТ (природа) с коллекцией красивых образов природы ===
+    // ==================== ТВОИ ССЫЛКИ НА КАРТИНКИ (рабочие) ====================
     const natureImages = [
-        "https://media.istockphoto.com/id/901134626/ru/%D1%84%D0%BE%D1%82%D0%BE/%D1%81%D0%BE%D0%BB%D0%BD%D1%86%D0%B5-%D1%81%D0%B2%D0%B5%D1%82%D0%B8%D1%82-%D0%B2-%D0%BB%D0%B5%D1%81%D1%83.jpg?s=612x612&w=0&k=20&c=19hnv0JtWse1gBvCUSwGK3RLwgkSn8Dvj8q64OVNlb0=",   // лес
+        "https://media.istockphoto.com/id/901134626/ru/%D1%84%D0%BE%D1%82%D0%BE/%D1%81%D0%BE%D0%BB%D0%BD%D1%86%D0%B5-%D1%81%D0%B2%D0%B5%D1%82%D0%B8%D1%82-%D0%B2-%D0%BB%D0%B5%D1%81%D1%83.jpg?s=612x612&w=0&k=20&c=19hnv0JtWse1gBvCUSwGK3RLwgkSn8Dvj8q64OVNlb0=",
         "https://99px.ru/sstorage/53/2014/08/tmb_108579_3847.jpg",
         "https://cdn.ingos.ru/images/blog/samye-krasivye-vodopady-mira.jpg",
         "https://avatars.mds.yandex.net/i?id=c9a0dc86806e982e549bd8f445af1573f4ba24e6-12305949-images-thumbs&n=13",
@@ -516,52 +321,198 @@
         "https://s2.fotokto.ru/photo/full/554/5543704.jpg",
         "https://media.istockphoto.com/id/611335120/ru/%D1%84%D0%BE%D1%82%D0%BE/%D0%BE%D1%81%D0%B5%D0%BD%D0%BD%D0%B5%D0%B5-%D1%81%D0%BE%D0%BB%D0%BD%D1%86%D0%B5-%D1%81%D0%B8%D1%8F%D1%8E%D1%89%D0%B8%D0%B5-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-%D0%BD%D0%B0%D0%B2%D0%B5%D1%81-%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%B0.jpg?s=612x612&w=0&k=20&c=eOpMvn-SuVGa6R9kXQ7UqGTcbuBt2uuBRdM8cFqW85M="
     ];
-    let currentNatureIndex = 0;
+    // Вопросы под каждую картинку (тоже кастомные, подбираются по индексу)
+    const questions = [
+        "🌲 Солнце в лесу. Что тебе сейчас нужно: свет или тень?",
+        "🏞️ Безмятежный пейзаж. Какое чувство здесь самое главное?",
+        "💧 Водопад — символ очищения. Что ты хочешь 'смыть'?",
+        "🌿 Зелёная тишина. Где в твоём теле сейчас чувствуется покой?",
+        "⛰️ Горы и простор. Какая опора внутри тебя откликается?",
+        "🌊 Море и скалы. Что для тебя сейчас 'горизонт'?",
+        "🍂 Осенний свет. Что приносит тебе тепло несмотря ни на что?"
+    ];
 
-    const natureImgElem = document.getElementById('natureImage');
-    const makQuestionSpan = document.getElementById('makQuestion');
-    
-    function updateNatureImage(index) {
-        index = index % natureImages.length;
-        currentNatureIndex = index;
-        natureImgElem.src = natureImages[currentNatureIndex];
-        // задаем разные вопросы-рефлексии под картинку (для усиления арт-терапии)
-        const questions = [
-            "🌲 Густой лес дарит укрытие. Что в этой картине приглашает тебя замедлиться?",
-            "☀️ Лучи света сквозь листву. Какая часть тебя сегодня нуждается в таком тепле?",
-            "💧 Водопад — символ очищения. Что ты хотел(а) бы 'смыть' потоком воды?",
-            "🍂 Осенняя тишина. Какие чувства сейчас живут внутри, похожие на эту золотую пору?",
-            "🏔️ Горы и покой. Какая внутренняя опора проснулась при взгляде на вершины?",
-            "🌊 Море и бесконечность. Что для тебя сейчас 'горизонт', к чему стремишься?",
-            "🌳 Сильное дерево, свет. Вспомни момент, когда ты чувствовал(а) себя устойчиво."
-        ];
-        makQuestionSpan.innerHTML = `🖌️ ${questions[index % questions.length]}<br><span style="font-size:0.8rem;">✨ Позволь себе просто побыть с этим образом.</span>`;
+    // ========== ИГРА С ЛИМОНОМ ==========
+    let squeezeInterval = null;
+    let currentSqueeze = 0;
+    let isSqueezing = false;
+    let repeatCount = 0;
+    let soundEnabled = true;
+    let audioCtx = null;
+
+    const squeezeFill = document.getElementById('squeezeFill');
+    const relaxMsgDiv = document.getElementById('relaxMsg');
+    const lemonSvg = document.getElementById('lemon-svg');
+    const juiceDrops = document.getElementById('juice-drops');
+    const counterSpan = document.getElementById('counterDisplay');
+    const resetBtn = document.getElementById('resetCounterBtn');
+    const toggleSoundBtn = document.getElementById('toggleSoundBtn');
+
+    function playSqueezeSound() {
+        if (!soundEnabled) return;
+        try {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.frequency.value = 300 + currentSqueeze * 2;
+            gain.gain.value = 0.1;
+            osc.start();
+            gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.2);
+            osc.stop(audioCtx.currentTime + 0.2);
+        } catch(e) { console.log("audio err"); }
     }
-    
-    natureImgElem.addEventListener('click', () => {
-        let newIndex = (currentNatureIndex + 1) % natureImages.length;
-        updateNatureImage(newIndex);
+
+    function playReleaseSound() {
+        if (!soundEnabled) return;
+        try {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.frequency.value = 200;
+            gain.gain.value = 0.08;
+            osc.start();
+            gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.4);
+            osc.stop(audioCtx.currentTime + 0.4);
+        } catch(e) {}
+    }
+
+    function updateVisual(intensity) {
+        let scale = 1 - (intensity * 0.12);
+        let rotate = intensity * 5;
+        lemonSvg.style.transform = `scale(${scale}) rotate(${rotate}deg)`;
+        juiceDrops.setAttribute('opacity', Math.min(intensity * 1.2, 0.8));
+        let bright = 1 - intensity * 0.2;
+        lemonSvg.style.filter = `drop-shadow(0 6px 10px rgba(0,0,0,0.2)) brightness(${bright})`;
+    }
+
+    function setSqueezePercent(percent) {
+        percent = Math.min(100, Math.max(0, percent));
+        currentSqueeze = percent;
+        squeezeFill.style.width = percent + '%';
+        updateVisual(percent / 100);
+        if (percent === 100 && isSqueezing) {
+            if (soundEnabled) playSqueezeSound();
+            relaxMsgDiv.innerHTML = '💪 ПОЛНЫЙ СТРЕСС! Сейчас отпусти — и расслабление накроет.';
+        } else if (percent > 50) {
+            relaxMsgDiv.innerHTML = '🍋 Сильно сжимай! Чувствуешь напряжение в кистях и плечах?';
+        } else {
+            relaxMsgDiv.innerHTML = '👇 Держи кнопку, выжимай лимон до конца...';
+        }
+    }
+
+    function startSqueeze() {
+        if (squeezeInterval) clearInterval(squeezeInterval);
+        isSqueezing = true;
+        squeezeInterval = setInterval(() => {
+            if (!isSqueezing) return;
+            if (currentSqueeze < 100) {
+                let inc = Math.min(8, 100 - currentSqueeze);
+                setSqueezePercent(currentSqueeze + inc);
+            } else {
+                clearInterval(squeezeInterval);
+                squeezeInterval = null;
+            }
+        }, 40);
+    }
+
+    function stopSqueeze() {
+        if (squeezeInterval) {
+            clearInterval(squeezeInterval);
+            squeezeInterval = null;
+        }
+        if (isSqueezing && currentSqueeze > 20) {
+            // успешное полное расслабление — засчитываем повтор
+            repeatCount++;
+            counterSpan.innerHTML = `🍋 Повторов: ${repeatCount}`;
+            if (soundEnabled) playReleaseSound();
+            relaxMsgDiv.innerHTML = '🧘‍♀️ Расслабление! Почувствуй тепло в руках. Отлично! Повтори ещё.';
+        } else if (isSqueezing) {
+            relaxMsgDiv.innerHTML = '🌿 Попробуй сжать сильнее и подержать подольше.';
+        }
+        isSqueezing = false;
+        // анимация расслабления (спад напряжения)
+        let relaxInterval = setInterval(() => {
+            if (currentSqueeze <= 2) {
+                setSqueezePercent(0);
+                clearInterval(relaxInterval);
+            } else {
+                setSqueezePercent(Math.max(0, currentSqueeze - 12));
+            }
+        }, 30);
+    }
+
+    // обработчики
+    const squeezeBtnElem = document.getElementById('squeezeBtn');
+    squeezeBtnElem.addEventListener('mousedown', (e) => { e.preventDefault(); startSqueeze(); });
+    squeezeBtnElem.addEventListener('mouseup', stopSqueeze);
+    squeezeBtnElem.addEventListener('mouseleave', stopSqueeze);
+    squeezeBtnElem.addEventListener('touchstart', (e) => { e.preventDefault(); startSqueeze(); });
+    squeezeBtnElem.addEventListener('touchend', stopSqueeze);
+    lemonSvg.addEventListener('mousedown', (e) => { e.preventDefault(); startSqueeze(); });
+    lemonSvg.addEventListener('mouseup', stopSqueeze);
+    lemonSvg.addEventListener('touchstart', (e) => { e.preventDefault(); startSqueeze(); });
+    lemonSvg.addEventListener('touchend', stopSqueeze);
+
+    resetBtn.addEventListener('click', () => {
+        repeatCount = 0;
+        counterSpan.innerHTML = `🌀 Повторов: 0`;
+        relaxMsgDiv.innerHTML = 'Счётчик сброшен. Начинай заново!';
+    });
+
+    let soundOn = true;
+    toggleSoundBtn.addEventListener('click', () => {
+        soundOn = !soundOn;
+        soundEnabled = soundOn;
+        toggleSoundBtn.innerHTML = soundOn ? '🔊 Звук: Вкл' : '🔇 Звук: Выкл';
+    });
+
+    // дыхательное упражнение
+    const breathBtn = document.getElementById('breathBtn');
+    const breathCircle = document.getElementById('breathCircle');
+    let breathing = false;
+    breathBtn.addEventListener('click', () => {
+        if (breathing) return;
+        breathing = true;
+        breathCircle.style.transition = 'all 4s ease';
+        breathCircle.style.transform = 'scale(1.8)';
+        breathCircle.style.background = '#b8d9aa';
+        breathCircle.innerHTML = 'Вдох...';
+        setTimeout(() => {
+            breathCircle.style.transform = 'scale(1)';
+            breathCircle.style.background = '#cfe2cf';
+            breathCircle.innerHTML = 'Выдох';
+            setTimeout(() => {
+                breathCircle.innerHTML = 'Вдох';
+                breathing = false;
+            }, 2000);
+        }, 4000);
+    });
+
+    // ========== МАК КАРТЫ с твоими ссылками ==========
+    let currentNatureIndex = 0;
+    const natureImg = document.getElementById('natureImage');
+    const makQuestionDiv = document.getElementById('makQuestion');
+
+    function updateNature(index) {
+        index = (index + natureImages.length) % natureImages.length;
+        currentNatureIndex = index;
+        natureImg.src = natureImages[currentNatureIndex];
+        makQuestionDiv.innerHTML = `📸 ${questions[currentNatureIndex % questions.length]}`;
+    }
+    document.getElementById('prevNatureBtn').addEventListener('click', () => {
+        updateNature(currentNatureIndex - 1);
     });
     document.getElementById('nextNatureBtn').addEventListener('click', () => {
-        let newIndex = (currentNatureIndex + 1) % natureImages.length;
-        updateNatureImage(newIndex);
+        updateNature(currentNatureIndex + 1);
     });
-    // случайная инициализация красивой картинкой
-    function initNature() {
-        let randomIdx = Math.floor(Math.random() * natureImages.length);
-        updateNatureImage(randomIdx);
-    }
-    initNature();
+    natureImg.addEventListener('click', () => updateNature(currentNatureIndex + 1));
+    updateNature(0);
 
-    // небольшое вибрато для тактильного отклика (если поддерживается)
-    if ('vibrate' in navigator) {
-        squeezeBtn.addEventListener('mousedown', () => {
-            navigator.vibrate(30);
-        });
-        squeezeBtn.addEventListener('mouseup', () => {
-            navigator.vibrate(20);
-        });
-    }
+    setSqueezePercent(0);
 </script>
 </body>
 </html>
