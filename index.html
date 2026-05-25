@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Психологическое SPA — Лимон + Дыхание + Спокойствия</title>
+    <title>Психологическое SPA — 5 инструментов для педагога</title>
     <style>
         * {
             margin: 0;
@@ -58,12 +58,13 @@
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 10px;
+            margin-bottom: 8px;
         }
 
         .sub {
             border-left: 4px solid #f9b23f;
             padding-left: 16px;
-            margin: 12px 0 20px;
+            margin: 8px 0 20px;
             background: #fff4e6;
             border-radius: 0 30px 30px 0;
             font-size: 0.9rem;
@@ -219,7 +220,7 @@
             color: #4c6b3c;
         }
 
-        /* Новая игра: Найди 5 спокойствий */
+        /* Игра: Найди спокойствия */
         .find-game-section {
             background: #e3f0fc;
             border-radius: 48px;
@@ -279,6 +280,69 @@
             padding: 8px 24px;
             margin-top: 10px;
         }
+
+        /* НОВЫЙ БЛОК: Котик */
+        .cat-section {
+            background: #fdf2e0;
+            border-radius: 48px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid #f3d9a4;
+            text-align: center;
+        }
+        .cat-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #aa793a;
+        }
+        .cat-emoji {
+            font-size: 100px;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+            filter: drop-shadow(0 8px 12px rgba(0,0,0,0.2));
+            display: inline-block;
+            margin: 10px 0;
+        }
+        .cat-emoji:active {
+            transform: scale(0.95);
+        }
+        .cat-counter {
+            background: #ffe0b5;
+            padding: 5px 12px;
+            border-radius: 30px;
+            display: inline-block;
+            margin: 5px 0;
+        }
+
+        /* НОВЫЙ БЛОК: Генератор поддержки */
+        .support-section {
+            background: #f5e6f5;
+            border-radius: 48px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid #e1bee7;
+            text-align: center;
+        }
+        .support-btn {
+            background: #b39ddb;
+            box-shadow: 0 4px 0 #7b5aa6;
+            color: white;
+            font-size: 1.2rem;
+            padding: 12px 24px;
+            width: auto;
+            margin: 10px;
+        }
+        .support-message {
+            background: white;
+            border-radius: 32px;
+            padding: 18px;
+            font-size: 1.1rem;
+            color: #4a2f6b;
+            margin-top: 15px;
+            font-weight: 500;
+            font-style: italic;
+        }
+
         /* МАК карты */
         .mak-card {
             background: #fff7e8;
@@ -314,6 +378,7 @@
             #lemon-svg { width: 130px; height: 130px; }
             .breathing-circle { width: 90px; height: 90px; font-size: 1rem; }
             .floating-icon { font-size: 24px; }
+            .cat-emoji { font-size: 75px; }
         }
     </style>
 </head>
@@ -321,13 +386,13 @@
 
 <div class="game-container">
     <div class="day-badge">
-        <span>🧘 ЧЕТВЕРГ • Психологическое SPA</span>
+        <span>🧘 Психологическое SPA — 5 инструментов</span>
     </div>
     <div class="content">
-        <h1>🍋 + 🌬️ + 🧩</h1>
-        <div class="sub">Мышечная релаксация · Дыхание · Заземление вниманием</div>
+        <h1>🍋 🐱 🌬️ 🧩 🌸</h1>
+        <div class="sub">Мышечная релаксация · Дыхание · Заземление · Теплота · Поддержка</div>
         <div class="why-block">
-            🧠 Комплекс из трёх техник: снимаем телесные зажимы, успокаиваем дыхание, переключаем внимание от тревоги.
+            🧠 Комплекс для быстрого восстановления: снимаем зажимы, успокаиваем дыхание, переключаем внимание, получаем тактильную и эмоциональную поддержку.
         </div>
 
         <!-- 1. Лимон -->
@@ -351,14 +416,14 @@
                 </svg>
             </div>
             <div class="squeeze-bar"><div class="squeeze-fill" id="squeezeFill"></div></div>
-            <div class="counter" id="counterDisplay">🌀 Повторов: 0</div>
+            <div class="counter" id="counterDisplay">🍋 Повторов: 0</div>
             <button class="squeeze-btn" id="squeezeBtn">🤜 СЖАТЬ И ДЕРЖАТЬ 🤛</button>
             <div id="relaxMsg" class="relax-message">👇 Нажми и удерживай — выжимай стресс.</div>
         </div>
 
         <!-- Панель звук/вибрация -->
         <div class="controls-panel">
-            <button class="small-btn" id="resetCounterBtn">🔄 Сбросить счётчик</button>
+            <button class="small-btn" id="resetCounterBtn">🔄 Сбросить счётчик лимона</button>
             <button class="small-btn" id="toggleSoundBtn">🔊 Звук: Вкл</button>
             <button class="small-btn" id="toggleVibeBtn">📳 Вибрация: Вкл</button>
         </div>
@@ -373,7 +438,7 @@
             <div id="breathStatus" class="breath-status">Нажми кнопку или на круг</div>
         </div>
 
-        <!-- 3. Новая игра: НАЙДИ 5 СПОКОЙСТВИЙ -->
+        <!-- 3. Игра "Найди 5 спокойствий" -->
         <div class="find-game-section">
             <div class="game-header">
                 <div class="score-board">🎯 Очки: <span id="gameScore">0</span></div>
@@ -386,7 +451,22 @@
             </div>
         </div>
 
-        <!-- МАК-карты (твои ссылки) -->
+        <!-- 4. НОВОЕ: Погладь антистресс-кота -->
+        <div class="cat-section">
+            <div class="cat-title">🐱 Погладь антистресс-кота</div>
+            <div id="catEmoji" class="cat-emoji">😺</div>
+            <div class="cat-counter">Поглаживаний: <span id="catPets">0</span></div>
+            <div class="game-message" id="catMessage">Нажми на котика — он замурлычет и успокоит тебя.</div>
+        </div>
+
+        <!-- 5. НОВОЕ: Генератор мягкой поддержки -->
+        <div class="support-section">
+            <div class="cat-title">🌸 Генератор мягкой поддержки</div>
+            <button class="small-btn support-btn" id="supportBtn">✨ Скажи мне доброе слово ✨</button>
+            <div id="supportMessage" class="support-message">✨ Нажми на кнопку, чтобы получить порцию тепла</div>
+        </div>
+
+        <!-- МАК-карты -->
         <div class="mak-card">
             <div class="mak-title">🖼️ Метафорическая карта природы</div>
             <img id="natureImage" class="nature-img" alt="природа" style="cursor:pointer;">
@@ -397,7 +477,7 @@
             </div>
         </div>
     </div>
-    <footer>🍋 Сжимай лимон · Дыши · Находи спокойствия — возвращай себе ресурс</footer>
+    <footer>🍋 Сжимай лимон · Дыши · Находи спокойствия · Гладь кота · Читай поддержку</footer>
 </div>
 
 <script>
@@ -531,7 +611,7 @@
 
     resetBtn.addEventListener('click', () => {
         repeatCount = 0;
-        counterSpan.innerHTML = `🌀 Повторов: 0`;
+        counterSpan.innerHTML = `🍋 Повторов: 0`;
         relaxMsgDiv.innerHTML = 'Счётчик сброшен.';
     });
 
@@ -582,17 +662,12 @@
     breathCircle.addEventListener('click', startBreathingCycle);
 
     // ========== 3. ИГРА "НАЙДИ 5 СПОКОЙСТВИЙ" ==========
-    // Список спокойных символов (то, что нужно кликать)
     const calmSymbols = ['☁️', '🌙', '🌸', '🌊', '🪶'];
-    // Отвлекающие (стрессовые) символы
     const stressSymbols = ['⚡', '🌩️', '💢', '🔥', '💣'];
     let gameActive = false;
     let gameScore = 0;
     let timeLeft = 30;
     let timerInterval = null;
-    let animationId = null;
-    let iconsArray = []; // храним DOM элементы и их тип
-
     const gameCanvas = document.getElementById('gameCanvas');
     const gameScoreSpan = document.getElementById('gameScore');
     const gameTimerSpan = document.getElementById('gameTimer');
@@ -617,62 +692,45 @@
         div.addEventListener('click', (e) => {
             e.stopPropagation();
             if (!gameActive) return;
-            handleIconClick(div);
+            if (isCalm) {
+                gameScore++;
+                gameScoreSpan.innerText = gameScore;
+                gameMessageDiv.innerHTML = '✅ +1 спокойствие! Отлично!';
+                if (soundEnabled) {
+                    try {
+                        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.frequency.value = 880;
+                        gain.gain.value = 0.1;
+                        osc.start();
+                        gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.15);
+                        osc.stop(audioCtx.currentTime + 0.15);
+                    } catch(e) {}
+                }
+                vibrate(15);
+                div.remove();
+                addRandomIcon();
+            } else {
+                gameMessageDiv.innerHTML = '❌ Это не спокойствие. Ищи ☁️ 🌙 🌸 🌊 🪶';
+                vibrate(40);
+                div.style.transform = 'scale(0.9)';
+                setTimeout(() => { div.style.transform = ''; }, 150);
+            }
+            if (gameScore >= 30) endGame(true);
         });
         gameCanvas.appendChild(div);
         randomPosition(div);
         return div;
     }
 
-    function handleIconClick(icon) {
-        if (!gameActive) return;
-        const isCalm = icon.dataset.calm === 'true';
-        if (isCalm) {
-            gameScore++;
-            gameScoreSpan.innerText = gameScore;
-            gameMessageDiv.innerHTML = '✅ +1 спокойствие! Отлично!';
-            if (soundEnabled) {
-                // короткий приятный звук (синтез)
-                try {
-                    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                    const osc = audioCtx.createOscillator();
-                    const gain = audioCtx.createGain();
-                    osc.connect(gain);
-                    gain.connect(audioCtx.destination);
-                    osc.frequency.value = 880;
-                    gain.gain.value = 0.1;
-                    osc.start();
-                    gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.15);
-                    osc.stop(audioCtx.currentTime + 0.15);
-                } catch(e) {}
-            }
-            vibrate(15);
-            icon.remove();
-            // создать новый символ (спокойный или случайный, чтобы не уменьшалось)
-            addRandomIcon();
-        } else {
-            gameMessageDiv.innerHTML = '❌ Это не спокойствие. Ищи ☁️ 🌙 🌸 🌊 🪶';
-            vibrate(40);
-            icon.style.transform = 'scale(0.9)';
-            setTimeout(() => { icon.style.transform = ''; }, 150);
-        }
-        // проверка победы
-        if (gameScore >= 30) {
-            endGame(true);
-        }
-    }
-
     function addRandomIcon() {
         if (!gameActive) return;
-        const isCalm = Math.random() < 0.6; // 60% спокойных, 40% отвлекающих
-        let symbol;
-        if (isCalm) {
-            symbol = calmSymbols[Math.floor(Math.random() * calmSymbols.length)];
-        } else {
-            symbol = stressSymbols[Math.floor(Math.random() * stressSymbols.length)];
-        }
+        const isCalm = Math.random() < 0.6;
+        let symbol = isCalm ? calmSymbols[Math.floor(Math.random() * calmSymbols.length)] : stressSymbols[Math.floor(Math.random() * stressSymbols.length)];
         const newIcon = createIcon(symbol, isCalm);
-        // плавное движение
         animateIcon(newIcon);
     }
 
@@ -680,7 +738,7 @@
         if (!gameActive) return;
         let dx = (Math.random() - 0.5) * 2;
         let dy = (Math.random() - 0.5) * 2;
-        let step = () => {
+        function step() {
             if (!gameActive || !icon.isConnected) return;
             let left = parseFloat(icon.style.left);
             let top = parseFloat(icon.style.top);
@@ -695,16 +753,13 @@
             newTop = Math.min(maxY, Math.max(0, newTop));
             icon.style.left = newLeft + 'px';
             icon.style.top = newTop + 'px';
-            requestAnimationFrame(() => step());
-        };
+            requestAnimationFrame(step);
+        }
         requestAnimationFrame(step);
     }
 
     function startGame() {
-        if (gameActive) {
-            endGame(false);
-        }
-        // очистка
+        if (gameActive) endGame(false);
         while (gameCanvas.firstChild) gameCanvas.removeChild(gameCanvas.firstChild);
         gameScore = 0;
         timeLeft = 30;
@@ -712,20 +767,12 @@
         gameTimerSpan.innerText = '30';
         gameMessageDiv.innerHTML = '🎯 Игра началась! Кликай на ☁️ 🌙 🌸 🌊 🪶';
         gameActive = true;
-        // создать 15 плавающих иконок
-        for (let i = 0; i < 18; i++) {
-            addRandomIcon();
-        }
-        // таймер
+        for (let i = 0; i < 18; i++) addRandomIcon();
         if (timerInterval) clearInterval(timerInterval);
         timerInterval = setInterval(() => {
             if (!gameActive) return;
-            if (timeLeft <= 1) {
-                endGame(false);
-            } else {
-                timeLeft--;
-                gameTimerSpan.innerText = timeLeft;
-            }
+            if (timeLeft <= 1) endGame(false);
+            else { timeLeft--; gameTimerSpan.innerText = timeLeft; }
         }, 1000);
     }
 
@@ -739,11 +786,100 @@
         } else {
             gameMessageDiv.innerHTML = `⏰ Время вышло! Ты набрал(а) ${gameScore} очков. Спокойствия всегда рядом, потренируйся ещё.`;
         }
-        // удаляем все иконки
         while (gameCanvas.firstChild) gameCanvas.removeChild(gameCanvas.firstChild);
     }
+    startGameBtn.addEventListener('click', startGame);
 
-    startGameBtn.addEventListener('click', () => startGame());
+    // ========== 4. КОТИК ==========
+    let petCount = 0;
+    const catEmoji = document.getElementById('catEmoji');
+    const catPetsSpan = document.getElementById('catPets');
+    const catMessage = document.getElementById('catMessage');
+    const catStates = ['😺', '😸', '😻', '😽', '😺'];
+    let catIndex = 0;
+
+    function petCat() {
+        petCount++;
+        catPetsSpan.innerText = petCount;
+        // Меняем эмоцию кота
+        catIndex = (catIndex + 1) % catStates.length;
+        catEmoji.innerText = catStates[catIndex];
+        catMessage.innerHTML = '🐾 Мур-р-р... Спасибо! Ты молодец, что заботишься о себе.';
+        if (soundEnabled) {
+            // синтезированное мурлыканье
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.type = 'sine';
+                osc.frequency.value = 140;
+                gain.gain.value = 0.08;
+                osc.start();
+                gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.6);
+                osc.stop(audioCtx.currentTime + 0.6);
+                // второй тон
+                setTimeout(() => {
+                    const osc2 = audioCtx.createOscillator();
+                    const gain2 = audioCtx.createGain();
+                    osc2.connect(gain2);
+                    gain2.connect(audioCtx.destination);
+                    osc2.frequency.value = 160;
+                    gain2.gain.value = 0.06;
+                    osc2.start();
+                    gain2.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.5);
+                    osc2.stop(audioCtx.currentTime + 0.5);
+                }, 200);
+            } catch(e) {}
+        }
+        vibrate([30, 15]);
+        // анимация
+        catEmoji.style.transform = 'scale(1.1)';
+        setTimeout(() => { catEmoji.style.transform = 'scale(1)'; }, 150);
+        setTimeout(() => {
+            catMessage.innerHTML = 'Нажми на котика — он замурлычет и успокоит тебя.';
+        }, 2000);
+    }
+    catEmoji.addEventListener('click', petCat);
+    catEmoji.addEventListener('touchstart', (e) => { e.preventDefault(); petCat(); });
+
+    // ========== 5. ГЕНЕРАТОР ПОДДЕРЖКИ ==========
+    const supportMessages = [
+        "✨ Ты уже делаешь достаточно. Просто быть – это нормально.",
+        "🌸 Твой отдых – это не слабость, а ресурс для работы.",
+        "🌼 Сегодня достаточно просто выжить – и это замечательно.",
+        "🍃 Ты не обязана быть идеальной. Достаточно быть собой.",
+        "💖 Воспитатель с горящим сердцем тоже имеет право на передышку.",
+        "🌟 Твоя усталость – знак того, что ты вкладываешь душу. Отдохни, мир подождёт.",
+        "🌙 После тяжёлого дня просто позволь себе мягко выдохнуть.",
+        "🧘 Ты заслуживаешь спокойствия уже потому, что ты есть.",
+        "🌻 Сейчас главное – твоё внутреннее состояние, не списки дел.",
+        "🕯️ Ты справляешься гораздо лучше, чем тебе кажется.",
+        "💧 Отпусти контроль на 5 минут – это ничего не сломает.",
+        "🐱 Котик тебя поддерживает. Мур."
+    ];
+    const supportBtn = document.getElementById('supportBtn');
+    const supportMessageDiv = document.getElementById('supportMessage');
+    supportBtn.addEventListener('click', () => {
+        const randomIndex = Math.floor(Math.random() * supportMessages.length);
+        supportMessageDiv.innerHTML = `✨ ${supportMessages[randomIndex]} ✨`;
+        if (soundEnabled) {
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.frequency.value = 660;
+                gain.gain.value = 0.08;
+                osc.start();
+                gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.3);
+                osc.stop(audioCtx.currentTime + 0.3);
+            } catch(e) {}
+        }
+        vibrate(20);
+    });
 
     // ========== МАК КАРТЫ (твои ссылки) ==========
     const natureImages = [
