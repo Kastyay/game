@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Четверг: Психологическое SPA — Лимонная релаксация</title>
+    <title>Четверг: Психологическое SPA — Лимон + Дыхание</title>
     <style>
         * {
             margin: 0;
@@ -23,13 +23,12 @@
         }
 
         .game-container {
-            max-width: 700px;
+            max-width: 750px;
             width: 100%;
             background: rgba(255, 250, 240, 0.97);
             border-radius: 68px;
             box-shadow: 0 25px 40px rgba(0, 0, 0, 0.2);
             overflow: hidden;
-            transition: all 0.2s;
         }
 
         .day-badge {
@@ -38,9 +37,7 @@
             text-align: center;
             color: #2d3e2b;
             font-weight: bold;
-            border-bottom: 3px solid #e08e2e;
         }
-
         .day-badge span {
             background: #fff2df;
             padding: 5px 20px;
@@ -59,7 +56,6 @@
             color: #2b5e2f;
             display: flex;
             justify-content: space-between;
-            align-items: center;
             flex-wrap: wrap;
             gap: 10px;
         }
@@ -84,6 +80,7 @@
             border-left: 6px solid #f9b23f;
         }
 
+        /* Лимонная игра */
         .game-area {
             background: #fef9e6;
             border-radius: 50px;
@@ -94,7 +91,6 @@
         }
 
         .lemon-visual {
-            position: relative;
             display: flex;
             justify-content: center;
             margin-bottom: 10px;
@@ -162,15 +158,15 @@
             border-radius: 28px;
             padding: 10px;
             margin-top: 12px;
-            transition: 0.1s;
         }
 
-        .extra-panel {
+        /* Панель управления вибрацией/звуком */
+        .controls-panel {
             display: flex;
             gap: 12px;
             justify-content: center;
             flex-wrap: wrap;
-            margin: 20px 0 10px;
+            margin: 15px 0 10px;
         }
 
         .small-btn {
@@ -184,26 +180,65 @@
             transition: 0.1s;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
+        .small-btn:active { transform: scale(0.96); }
 
-        .small-btn:active {
-            transform: scale(0.96);
+        /* Дыхательная секция (рамка) */
+        .breathing-section {
+            background: #e6f0e2;
+            border-radius: 48px;
+            padding: 20px;
+            margin: 20px 0 20px;
+            border: 2px solid #c2dcb2;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.05);
         }
-
-        .breathing-circle {
-            width: 60px;
-            height: 60px;
-            background: #cfe2cf;
-            border-radius: 50%;
-            margin: 5px auto;
-            transition: all 1s ease;
+        .breathing-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #3e6b3a;
+            text-align: center;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.7rem;
-            color: #2b5e2f;
+            gap: 10px;
+        }
+        .breathing-circle-container {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+        .breathing-circle {
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, #c2e0b2, #9bc889);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
             font-weight: bold;
+            color: #2a5e25;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: all 0.1s ease;
+            will-change: transform, background;
+            cursor: pointer;
+        }
+        .breath-btn {
+            background: #6f9e5c;
+            box-shadow: 0 4px 0 #3f6034;
+            color: white;
+            margin-top: 15px;
+            width: auto;
+            padding: 10px 24px;
+        }
+        .breath-status {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #4c6b3c;
         }
 
+        /* МАК карты */
         .mak-card {
             background: #fff7e8;
             border-radius: 40px;
@@ -211,7 +246,6 @@
             border: 1px solid #ffe3b5;
             margin-top: 20px;
         }
-
         .nature-img {
             width: 100%;
             border-radius: 28px;
@@ -220,7 +254,6 @@
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-
         .mak-question {
             font-style: italic;
             margin-top: 12px;
@@ -229,7 +262,6 @@
             padding: 8px;
             border-radius: 20px;
         }
-
         footer {
             text-align: center;
             font-size: 0.7rem;
@@ -237,10 +269,10 @@
             padding: 15px;
             border-top: 1px solid #ece1cf;
         }
-
         @media (max-width: 500px) {
             .content { padding: 18px; }
             #lemon-svg { width: 130px; height: 130px; }
+            .breathing-circle { width: 90px; height: 90px; font-size: 1rem; }
         }
     </style>
 </head>
@@ -251,25 +283,21 @@
         <span>🍋 ЧЕТВЕРГ • День психологического SPA</span>
     </div>
     <div class="content">
-        <h1>
-            🧘 Сожми лимон
-            <span style="font-size: 0.8rem;">прогрессивная релаксация</span>
-        </h1>
-        <div class="sub">📖 Мышечное напряжение → глубокое расслабление</div>
+        <h1>🧘 Сожми лимон + Дыхание</h1>
+        <div class="sub">📖 Мышечная релаксация + восстановление дыхания</div>
         <div class="why-block">
-            🧠 <strong>Зачем:</strong> стресс живёт в мышцах. Сжимая лимон, ты даёшь сигнал мозгу: «опасность прошла», а расслабление снимает зажимы. Повтори 3–5 раз для лучшего эффекта.
+            🧠 <strong>Зачем:</strong> стресс живёт в мышцах. Сжимая лимон, ты снимаешь зажимы, а дыхательные циклы успокаивают нервную систему.
         </div>
 
+        <!-- ИГРА ЛИМОН -->
         <div class="game-area">
             <div class="lemon-visual">
                 <svg id="lemon-svg" viewBox="0 0 100 100" fill="none">
-                    <defs>
-                        <radialGradient id="lemonGrad" cx="30%" cy="30%" r="70%">
-                            <stop offset="0%" stop-color="#FFE484" />
-                            <stop offset="70%" stop-color="#F9C43D" />
-                            <stop offset="100%" stop-color="#E5A022" />
-                        </radialGradient>
-                    </defs>
+                    <defs><radialGradient id="lemonGrad" cx="30%" cy="30%" r="70%">
+                        <stop offset="0%" stop-color="#FFE484" />
+                        <stop offset="70%" stop-color="#F9C43D" />
+                        <stop offset="100%" stop-color="#E5A022" />
+                    </radialGradient></defs>
                     <ellipse cx="50" cy="54" rx="38" ry="42" fill="url(#lemonGrad)" stroke="#E0A82B" stroke-width="2" />
                     <ellipse cx="36" cy="38" rx="10" ry="8" fill="#FFF9CF" opacity="0.6" />
                     <path d="M50 14 Q53 9 58 8" stroke="#6f5e3a" stroke-width="2" fill="none" />
@@ -281,22 +309,35 @@
                     </g>
                 </svg>
             </div>
-            <div class="squeeze-bar">
-                <div class="squeeze-fill" id="squeezeFill"></div>
-            </div>
+            <div class="squeeze-bar"><div class="squeeze-fill" id="squeezeFill"></div></div>
             <div class="counter" id="counterDisplay">🌀 Повторов: 0</div>
             <button class="squeeze-btn" id="squeezeBtn">🤜 СЖАТЬ И ДЕРЖАТЬ 🤛</button>
             <div id="relaxMsg" class="relax-message">👇 Нажми и удерживай — выжимай стресс. Отпусти — расслабься.</div>
         </div>
 
-        <div class="extra-panel">
+        <!-- Панель управления звуком и вибрацией -->
+        <div class="controls-panel">
             <button class="small-btn" id="resetCounterBtn">🔄 Сбросить счётчик</button>
             <button class="small-btn" id="toggleSoundBtn">🔊 Звук: Вкл</button>
-            <button class="small-btn" id="breathBtn">🌬️ Сделать вдох</button>
+            <button class="small-btn" id="toggleVibeBtn">📳 Вибрация: Вкл</button>
         </div>
-        <div id="breathCircle" class="breathing-circle">Вдох</div>
 
-        <!-- МАК карты с твоими ссылками -->
+        <!-- ОТДЕЛЬНАЯ СЕКЦИЯ ДЫХАНИЯ (рамка) -->
+        <div class="breathing-section">
+            <div class="breathing-title">
+                🌬️ Дыхательная практика
+                <span style="font-size:0.8rem;">4 сек — вдох, 4 сек — выдох</span>
+            </div>
+            <div class="breathing-circle-container">
+                <div id="breathCircle" class="breathing-circle">Вдох</div>
+            </div>
+            <div style="text-align: center;">
+                <button class="small-btn breath-btn" id="startBreathBtn">🌀 Сделать цикл (вдох+выдох)</button>
+            </div>
+            <div id="breathStatus" class="breath-status">Нажми кнопку, чтобы начать</div>
+        </div>
+
+        <!-- МАК-карты (твои ссылки) -->
         <div class="mak-card">
             <div class="mak-title">🖼️ Метафорическая карта природы</div>
             <img id="natureImage" class="nature-img" alt="природа" style="cursor:pointer;">
@@ -307,11 +348,11 @@
             </div>
         </div>
     </div>
-    <footer>🍋 Сжимай лимон — отпускай напряжение. Повтори 3–5 раз для полной релаксации.</footer>
+    <footer>🍋 Сжимай лимон — отпускай напряжение. Дыши глубже — успокаивай сердце.</footer>
 </div>
 
 <script>
-    // ==================== ТВОИ ССЫЛКИ НА КАРТИНКИ (рабочие) ====================
+    // ========== ТВОИ РАБОЧИЕ ССЫЛКИ НА КАРТИНКИ ==========
     const natureImages = [
         "https://media.istockphoto.com/id/901134626/ru/%D1%84%D0%BE%D1%82%D0%BE/%D1%81%D0%BE%D0%BB%D0%BD%D1%86%D0%B5-%D1%81%D0%B2%D0%B5%D1%82%D0%B8%D1%82-%D0%B2-%D0%BB%D0%B5%D1%81%D1%83.jpg?s=612x612&w=0&k=20&c=19hnv0JtWse1gBvCUSwGK3RLwgkSn8Dvj8q64OVNlb0=",
         "https://99px.ru/sstorage/53/2014/08/tmb_108579_3847.jpg",
@@ -321,7 +362,6 @@
         "https://s2.fotokto.ru/photo/full/554/5543704.jpg",
         "https://media.istockphoto.com/id/611335120/ru/%D1%84%D0%BE%D1%82%D0%BE/%D0%BE%D1%81%D0%B5%D0%BD%D0%BD%D0%B5%D0%B5-%D1%81%D0%BE%D0%BB%D0%BD%D1%86%D0%B5-%D1%81%D0%B8%D1%8F%D1%8E%D1%89%D0%B8%D0%B5-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-%D0%BD%D0%B0%D0%B2%D0%B5%D1%81-%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%B0.jpg?s=612x612&w=0&k=20&c=eOpMvn-SuVGa6R9kXQ7UqGTcbuBt2uuBRdM8cFqW85M="
     ];
-    // Вопросы под каждую картинку (тоже кастомные, подбираются по индексу)
     const questions = [
         "🌲 Солнце в лесу. Что тебе сейчас нужно: свет или тень?",
         "🏞️ Безмятежный пейзаж. Какое чувство здесь самое главное?",
@@ -332,12 +372,13 @@
         "🍂 Осенний свет. Что приносит тебе тепло несмотря ни на что?"
     ];
 
-    // ========== ИГРА С ЛИМОНОМ ==========
+    // ========== ЛИМОН С ВИБРАЦИЕЙ ==========
     let squeezeInterval = null;
     let currentSqueeze = 0;
     let isSqueezing = false;
     let repeatCount = 0;
     let soundEnabled = true;
+    let vibeEnabled = true;
     let audioCtx = null;
 
     const squeezeFill = document.getElementById('squeezeFill');
@@ -347,6 +388,11 @@
     const counterSpan = document.getElementById('counterDisplay');
     const resetBtn = document.getElementById('resetCounterBtn');
     const toggleSoundBtn = document.getElementById('toggleSoundBtn');
+    const toggleVibeBtn = document.getElementById('toggleVibeBtn');
+
+    function vibrate(pattern) {
+        if (vibeEnabled && navigator.vibrate) navigator.vibrate(pattern);
+    }
 
     function playSqueezeSound() {
         if (!soundEnabled) return;
@@ -361,7 +407,7 @@
             osc.start();
             gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.2);
             osc.stop(audioCtx.currentTime + 0.2);
-        } catch(e) { console.log("audio err"); }
+        } catch(e) {}
     }
 
     function playReleaseSound() {
@@ -396,6 +442,7 @@
         updateVisual(percent / 100);
         if (percent === 100 && isSqueezing) {
             if (soundEnabled) playSqueezeSound();
+            vibrate(50);
             relaxMsgDiv.innerHTML = '💪 ПОЛНЫЙ СТРЕСС! Сейчас отпусти — и расслабление накроет.';
         } else if (percent > 50) {
             relaxMsgDiv.innerHTML = '🍋 Сильно сжимай! Чувствуешь напряжение в кистях и плечах?';
@@ -407,6 +454,7 @@
     function startSqueeze() {
         if (squeezeInterval) clearInterval(squeezeInterval);
         isSqueezing = true;
+        vibrate(30);  // короткая вибрация при начале сжатия
         squeezeInterval = setInterval(() => {
             if (!isSqueezing) return;
             if (currentSqueeze < 100) {
@@ -425,16 +473,15 @@
             squeezeInterval = null;
         }
         if (isSqueezing && currentSqueeze > 20) {
-            // успешное полное расслабление — засчитываем повтор
             repeatCount++;
             counterSpan.innerHTML = `🍋 Повторов: ${repeatCount}`;
             if (soundEnabled) playReleaseSound();
+            vibrate(20);
             relaxMsgDiv.innerHTML = '🧘‍♀️ Расслабление! Почувствуй тепло в руках. Отлично! Повтори ещё.';
         } else if (isSqueezing) {
             relaxMsgDiv.innerHTML = '🌿 Попробуй сжать сильнее и подержать подольше.';
         }
         isSqueezing = false;
-        // анимация расслабления (спад напряжения)
         let relaxInterval = setInterval(() => {
             if (currentSqueeze <= 2) {
                 setSqueezePercent(0);
@@ -445,7 +492,7 @@
         }, 30);
     }
 
-    // обработчики
+    // обработчики лимона
     const squeezeBtnElem = document.getElementById('squeezeBtn');
     squeezeBtnElem.addEventListener('mousedown', (e) => { e.preventDefault(); startSqueeze(); });
     squeezeBtnElem.addEventListener('mouseup', stopSqueeze);
@@ -469,30 +516,55 @@
         soundEnabled = soundOn;
         toggleSoundBtn.innerHTML = soundOn ? '🔊 Звук: Вкл' : '🔇 Звук: Выкл';
     });
-
-    // дыхательное упражнение
-    const breathBtn = document.getElementById('breathBtn');
-    const breathCircle = document.getElementById('breathCircle');
-    let breathing = false;
-    breathBtn.addEventListener('click', () => {
-        if (breathing) return;
-        breathing = true;
-        breathCircle.style.transition = 'all 4s ease';
-        breathCircle.style.transform = 'scale(1.8)';
-        breathCircle.style.background = '#b8d9aa';
-        breathCircle.innerHTML = 'Вдох...';
-        setTimeout(() => {
-            breathCircle.style.transform = 'scale(1)';
-            breathCircle.style.background = '#cfe2cf';
-            breathCircle.innerHTML = 'Выдох';
-            setTimeout(() => {
-                breathCircle.innerHTML = 'Вдох';
-                breathing = false;
-            }, 2000);
-        }, 4000);
+    let vibeOn = true;
+    toggleVibeBtn.addEventListener('click', () => {
+        vibeOn = !vibeOn;
+        vibeEnabled = vibeOn;
+        toggleVibeBtn.innerHTML = vibeOn ? '📳 Вибрация: Вкл' : '🔕 Вибрация: Выкл';
     });
 
-    // ========== МАК КАРТЫ с твоими ссылками ==========
+    // ========== ДЫХАТЕЛЬНАЯ ПРАКТИКА (отдельная секция) ==========
+    const breathCircle = document.getElementById('breathCircle');
+    const startBreathBtn = document.getElementById('startBreathBtn');
+    const breathStatus = document.getElementById('breathStatus');
+    let isBreathing = false;
+
+    function startBreathingCycle() {
+        if (isBreathing) {
+            breathStatus.innerText = '⏳ Уже дышим... подожди.';
+            return;
+        }
+        isBreathing = true;
+        breathStatus.innerText = '🌬️ Вдох... 4 секунды';
+        breathCircle.style.transition = 'all 4s cubic-bezier(0.2, 0.9, 0.4, 1.1)';
+        breathCircle.style.transform = 'scale(1.8)';
+        breathCircle.style.background = 'radial-gradient(circle, #b3e0a0, #7cb86a)';
+        breathCircle.innerText = 'Вдох';
+        // вибрация на старте вдоха (если включена)
+        if (vibeEnabled && navigator.vibrate) navigator.vibrate(20);
+
+        setTimeout(() => {
+            breathCircle.style.transition = 'all 4s ease-out';
+            breathCircle.style.transform = 'scale(1)';
+            breathCircle.style.background = 'radial-gradient(circle, #c2e0b2, #9bc889)';
+            breathCircle.innerText = 'Выдох';
+            breathStatus.innerText = '😌 Выдох... 4 секунды';
+            if (vibeEnabled && navigator.vibrate) navigator.vibrate(15);
+            setTimeout(() => {
+                breathCircle.innerText = 'Вдох';
+                breathStatus.innerText = '✅ Цикл завершён. Можешь повторить.';
+                isBreathing = false;
+                // финальная вибрация
+                if (vibeEnabled && navigator.vibrate) navigator.vibrate(10);
+            }, 4000);
+        }, 4000);
+    }
+
+    startBreathBtn.addEventListener('click', startBreathingCycle);
+    // клик по кругу тоже запускает дыхание для удобства
+    breathCircle.addEventListener('click', startBreathingCycle);
+
+    // ========== МАК КАРТЫ ==========
     let currentNatureIndex = 0;
     const natureImg = document.getElementById('natureImage');
     const makQuestionDiv = document.getElementById('makQuestion');
@@ -503,15 +575,10 @@
         natureImg.src = natureImages[currentNatureIndex];
         makQuestionDiv.innerHTML = `📸 ${questions[currentNatureIndex % questions.length]}`;
     }
-    document.getElementById('prevNatureBtn').addEventListener('click', () => {
-        updateNature(currentNatureIndex - 1);
-    });
-    document.getElementById('nextNatureBtn').addEventListener('click', () => {
-        updateNature(currentNatureIndex + 1);
-    });
+    document.getElementById('prevNatureBtn').addEventListener('click', () => updateNature(currentNatureIndex - 1));
+    document.getElementById('nextNatureBtn').addEventListener('click', () => updateNature(currentNatureIndex + 1));
     natureImg.addEventListener('click', () => updateNature(currentNatureIndex + 1));
     updateNature(0);
-
     setSqueezePercent(0);
 </script>
 </body>
